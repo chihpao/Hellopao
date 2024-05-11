@@ -20,3 +20,13 @@ export function AIMessage({ message }) {
         </div>
     );
 }
+
+export function ErrorMessage({ message }) {
+    return (
+        <div className={`${flexBlockClasses} justify-start`}>
+            <div className={`${messageClasses} from-lime-400 to-indigo-600 text-white`}>
+                {message.text}
+            </div>
+        </div>
+    );
+}

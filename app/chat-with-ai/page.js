@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import { useState, useEffect } from 'react';
-import { UserMessage, AIMessage } from '@/components/Message';
+import { UserMessage, AIMessage , ErrorMessage} from '@/components/Message';
 
 export default function ChatWithAI() {
     // 使用 useState 來定義 userMessageInput 狀態
@@ -51,6 +51,12 @@ export default function ChatWithAI() {
             })
             .catch(err => {
                 console.log("失敗", err);
+                const errorMessage = {
+                    text: "嘿嘿嘿嘿嘿,你看不到我",
+                    createdBy: "error",
+                    createdAt: new Date().getTime()
+                };
+                setMessageList(prevState => [...prevState, errorMessage]);
             })
     }
 
@@ -58,11 +64,12 @@ export default function ChatWithAI() {
     const messageListItems = messageList.map((message, index) => {
         if (message.createdBy === "user") {
             return <UserMessage message={message} key={index} />
-        } else {
+        } else if (message.createdBy === "ai") {
             return <AIMessage message={message} key={index} />
+        }else{
+            return <ErrorMessage message={message} key={index} />
         }
     });
-
     return (
         <main className="flex flex-col bg-gradient-to-r from-slate-100 to-slate-200 h-screen pt-[56px]">
             <div className="chat-room w-full h-full flex-1 overflow-y-scroll">
