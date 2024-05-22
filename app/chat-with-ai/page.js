@@ -53,6 +53,7 @@ export default function ChatWithAI() {
                 console.log("失敗", err);
                 const errorMessage = {
                     text: "嘿嘿嘿嘿嘿,你看不到我",
+                    text: "嘿嘿嘿嘿嘿,才有鬼,西西西西西",
                     createdBy: "error",
                     createdAt: new Date().getTime()
                 };
